@@ -1,21 +1,67 @@
-// vectors(arrays)
+// // vectors(arrays)
 
-// funtion which filter and returns even values of the given vector
-fn main() {
-    let vec = vec![1, 2, 3, 4];
+// // funtion which filter and returns even values of the given vector
+// fn main() {
+//     let vec = vec![1, 2, 3, 4];
 
-    println!("{:?}", vec);
-    println!("Even elements of the vector: {:?}", filter_vec(vec));
-}
+//     println!("{:?}", vec);
+//     println!("Even elements of the vector: {:?}", filter_vec(vec));
+// }
 
-fn filter_vec(vec: Vec<i32>) -> Vec<i32> {
-    let mut new_vec = Vec::new();
+// fn filter_vec(vec: Vec<i32>) -> Vec<i32> {
+//     let mut new_vec = Vec::new();
 
-    for val in vec {
-        if val % 2 == 0 {
-            new_vec.push(val);
-        }
+//     for val in vec {
+//         if val % 2 == 0 {
+//             new_vec.push(val);
+//         }
+//     }
+
+//     return new_vec;
+// }
+
+
+
+// // Hashmaps(key value pair)
+// // Methods in Hashmap: insert, get, remove, clear
+
+// use std::collections::HashMap;
+
+// fn main() {
+//     let mut users = HashMap::new();
+
+//     // insert
+//     users.insert(String::from("Sada"), 23);
+//     users.insert(String::from("Shiva"), 18);
+
+//     //get
+//     let user1 = users.get("Shiva");         // we should use Options here so that if the key does not exist we will get suitable message.
+
+//     match user1 {
+//         Some(value) => println!("{}", value),
+//         None => println!("Key does not exist."),
+//     }
+// }
+
+
+// create a funtion group_values_by_keys where you will get vector with values as tuple(string, i32) and return the hashmap with tuple values init
+
+use std::collections::HashMap;
+
+fn group_values_by_keys(vec: Vec<(String, i32)>) -> HashMap<String, i32> {
+    let mut hashmap = HashMap::new();
+
+    for (key, value) in vec {
+        hashmap.insert(key, value);
     }
 
-    return new_vec;
+    return hashmap;
+}
+
+fn main() {
+    let vec = vec![(String::from("Sada"), 23), (String::from("Shiva"), 83)];
+
+    let hashmap = group_values_by_keys(vec);
+
+    println!("{:?}", hashmap);
 }
