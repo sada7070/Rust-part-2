@@ -160,14 +160,26 @@
 //     println!("{:?}", nums)
 // }
 
-// filter
+// // filter
+// fn main() {
+//     let nums = vec![1, 2, 3, 4];
+//     let iter = nums.iter();
+
+//     let iter2 = iter.filter(|x| *x % 2 == 0);   // select x if x % 2 == 0    (*x == -> if x ==)
+//     for x in iter2 {
+//         println!("{}", x);
+//     }
+//     println!("{:?}", nums);
+// }
+
+
+// assignment: write the logic to first filter all odd values then double each value and create a new vector
 fn main() {
-    let nums = vec![1, 2, 3, 4];
+    let nums = vec![1, 2, 3, 4, 5, 6];
     let iter = nums.iter();
 
-    let iter2 = iter.filter(|x| *x % 2 == 0);   // select x if x % 2 == 0    (*x == -> if x ==)
-    for x in iter2 {
-        println!("{}", x);
-    }
-    println!("{:?}", nums);
+    let iter2 = iter.filter(|x| *x % 2 != 0).map(|x| x * 2);
+
+    let new_vec: Vec<i32> = iter2.collect();
+    println!("{:?}", new_vec);
 }
