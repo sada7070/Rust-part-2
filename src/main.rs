@@ -44,24 +44,85 @@
 // }
 
 
-// create a funtion group_values_by_keys where you will get vector with values as tuple(string, i32) and return the hashmap with tuple values init
+// // create a funtion group_values_by_keys where you will get vector with values as tuple(string, i32) and return the hashmap with tuple values init
 
-use std::collections::HashMap;
+// use std::collections::HashMap;
 
-fn group_values_by_keys(vec: Vec<(String, i32)>) -> HashMap<String, i32> {
-    let mut hashmap = HashMap::new();
+// fn group_values_by_keys(vec: Vec<(String, i32)>) -> HashMap<String, i32> {
+//     let mut hashmap = HashMap::new();
 
-    for (key, value) in vec {
-        hashmap.insert(key, value);
-    }
+//     for (key, value) in vec {
+//         hashmap.insert(key, value);
+//     }
 
-    return hashmap;
-}
+//     return hashmap;
+// }
 
+// fn main() {
+//     let vec = vec![(String::from("Sada"), 23), (String::from("Shiva"), 83)];
+
+//     let hashmap = group_values_by_keys(vec);
+
+//     println!("{:?}", hashmap);
+// }
+
+
+
+
+// Iterators
+
+// // Iterating using for loop                                         // even_num will take the ownership of the original values
+// fn main() {
+//     let nums = vec![1, 2, 3];
+//     let mut even_num = Vec::new();
+
+//     for val in nums {
+//         if val % 2 == 0 {
+//             even_num.push(val);
+//         }
+//     }
+//     println!("{:?}", even_num);
+// }
+
+// // Iterating after creating an 'iterator'(immutable)             // iter will not take the ownership of the original values
+// fn main() {
+//     let nums = vec![1, 2, 3];
+//     let iter = nums.iter();
+
+//     for values in iter{
+//         println!("{}", values);
+//     }
+//     println!("{:?}", nums);
+// }
+
+// // Iterating after creating an 'iterator'(mutable)               // iter will not take the ownership of the original values
+// fn main() {
+//     let mut nums = vec![1, 2, 3];
+//     let iter = nums.iter_mut();
+
+//     for values in iter {
+//         println!("{}", *values + 1);
+//     }
+//     println!("{:?}", nums);
+// }
+
+// // Iterating using '.next()'(both mutable and unmutable)            // iter will not take the ownership of the original values
+// fn main() {
+//     let nums = vec![1, 2, 3];
+//     let mut iter = nums.iter();
+
+//     while let Some(val) = iter.next() {
+//         println!("{}", val + 1);
+//     }
+//     println!("{:?}", nums);
+// }
+
+// Iteating using 'into_iter()'                                     // iter will take the ownership of the original values(this is same as writing 'for loop')
 fn main() {
-    let vec = vec![(String::from("Sada"), 23), (String::from("Shiva"), 83)];
+    let nums = vec![1, 2, 3];
+    let iter = nums.into_iter();
 
-    let hashmap = group_values_by_keys(vec);
-
-    println!("{:?}", hashmap);
+    for values in iter {
+        println!("{}", values);
+    }
 }
