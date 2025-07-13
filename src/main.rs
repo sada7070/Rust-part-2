@@ -84,7 +84,7 @@
 //     println!("{:?}", even_num);
 // }
 
-// // Iterating after creating an 'iterator'(immutable)             // iter will not take the ownership of the original values
+// // Iterating after creating an 'iterator'(immutable)                 // iter will not take the ownership of the original values
 // fn main() {
 //     let nums = vec![1, 2, 3];
 //     let iter = nums.iter();
@@ -95,7 +95,7 @@
 //     println!("{:?}", nums);
 // }
 
-// // Iterating after creating an 'iterator'(mutable)               // iter will not take the ownership of the original values
+// // Iterating after creating an 'iterator'(mutable)                   // iter will not take the ownership of the original values
 // fn main() {
 //     let mut nums = vec![1, 2, 3];
 //     let iter = nums.iter_mut();
@@ -106,7 +106,7 @@
 //     println!("{:?}", nums);
 // }
 
-// // Iterating using '.next()'(both mutable and unmutable)            // iter will not take the ownership of the original values
+// // Iterating using '.next()'(both mutable and unmutable)             // iter will not take the ownership of the original values
 // fn main() {
 //     let nums = vec![1, 2, 3];
 //     let mut iter = nums.iter();
@@ -117,12 +117,57 @@
 //     println!("{:?}", nums);
 // }
 
-// Iteating using 'into_iter()'                                     // iter will take the ownership of the original values(this is same as writing 'for loop')
-fn main() {
-    let nums = vec![1, 2, 3];
-    let iter = nums.into_iter();
+// // Iteating using 'into_iter()'                                         // iter will take the ownership of the original values(this is same as writing 'for loop')
+// fn main() {
+//     let nums = vec![1, 2, 3];
+//     let iter = nums.into_iter();
 
-    for values in iter {
-        println!("{}", values);
+//     for values in iter {
+//         println!("{}", values);
+//     }
+// }
+
+
+// // consumig adoptors in Iterators
+// // we get some built in functions with the use of iter() which are depend on iter but not on original values
+
+// fn main() {
+//     let nums = vec![1, 2, 3];
+//     let iter = nums.iter();
+
+//     let sum2: i32 = iter.sum();
+    
+//     println!("Sum of numbers = {}", sum2);
+
+//     //let sum2: i32 = iter.sum();   here tryied to use iter again but it is already consumed by the sum1
+// }
+
+
+// iterator adoptors
+// they do not consume iterators as in consume adoptors, instead they produce different iterators by changing some aspects of the original iterator
+// they have map, filter as inbuilt functions
+
+// // map
+// fn main() {
+//     let nums = vec![1, 2, 3];
+//     let iter = nums.iter();
+
+//     let iter2 = iter.map(|x| x + 1);
+    
+//     for x in iter2 {
+//         println!("{}", x);
+//     }
+//     println!("{:?}", nums)
+// }
+
+// filter
+fn main() {
+    let nums = vec![1, 2, 3, 4];
+    let iter = nums.iter();
+
+    let iter2 = iter.filter(|x| *x % 2 == 0);   // select x if x % 2 == 0    (*x == -> if x ==)
+    for x in iter2 {
+        println!("{}", x);
     }
+    println!("{:?}", nums);
 }
