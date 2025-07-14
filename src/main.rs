@@ -222,24 +222,45 @@
 //     return first_name;
 // }
 
-// the above code creates new string to store first_name, we dont want it. We want to crete a view to the first_name from full_name.
-// soluting
+// // the above code creates new string to store first_name, we dont want it. We want to crete a view to the first_name from full_name.
+// // soluting
 
+// fn main() {
+//     let full_name = String::from("Sada Shiva");
+//     let first_name = first_name(&full_name);
+//     println!("{}", first_name);
+// }
+
+// fn first_name(full_name: &String) -> &str {
+//     let mut space_index = 0;
+
+//     for val in full_name.chars() {
+//         if val == ' '{
+//             break;
+//         }
+//         space_index += 1;
+//     }
+
+//     return &full_name[0..space_index];
+// }
+
+
+
+
+
+// Generics
 fn main() {
-    let full_name = String::from("Sada Shiva");
-    let first_name = first_name(&full_name);
-    println!("{}", first_name);
+    let largest_num = largest(1, 2);
+    let largest_char = largest('a', 'b');
+
+    println!("largest number: {}", largest_num);
+    println!("largest character: {}", largest_char);
 }
 
-fn first_name(full_name: &String) -> &str {
-    let mut space_index = 0;
-
-    for val in full_name.chars() {
-        if val == ' '{
-            break;
-        }
-        space_index += 1;
+fn largest<T: std::cmp::PartialOrd>(a: T, b: T) -> T {
+    if a > b {
+        a
+    } else {
+        b
     }
-
-    return &full_name[0..space_index];
 }
