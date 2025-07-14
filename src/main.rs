@@ -191,33 +191,55 @@
 
 // // strings
 // fn main() {
-//     let mut str = String::from("Sada");                                 // string initialization
+//     let mut str = String::from("Sada");                                  // string initialization
 //     println!("{}", str);
 
 //     str.push_str("shiva");                                               // string mutation
 //     println!("{}", str);
 
-//     str.replace_range(4..str.len(), "");                     // edit/delete string
+//     str.replace_range(4..str.len(), "");                                 // edit/delete string
 //     println!("{}", str);   
 // }
 
 
-// string
-fn main(){
+// // string
+// fn main(){
+//     let full_name = String::from("Sada Shiva");
+//     let first_name = first_name(full_name);
+//     println!("{}", first_name);
+// }
+
+// fn first_name(full_name: String) -> String {
+//     let mut first_name = String::from("");
+
+//     for char in full_name.chars() {
+//         if char == ' ' {
+//             break;
+//         }
+//         first_name.push_str(&char.to_string());
+//     }
+
+//     return first_name;
+// }
+
+// the above code creates new string to store first_name, we dont want it. We want to crete a view to the first_name from full_name.
+// soluting
+
+fn main() {
     let full_name = String::from("Sada Shiva");
-    let first_name = first_name(full_name);
+    let first_name = first_name(&full_name);
     println!("{}", first_name);
 }
 
-fn first_name(full_name: String) -> String {
-    let mut first_name = String::from("");
+fn first_name(full_name: &String) -> &str {
+    let mut space_index = 0;
 
-    for char in full_name.chars() {
-        if char == ' ' {
+    for val in full_name.chars() {
+        if val == ' '{
             break;
         }
-        first_name.push_str(&char.to_string());
+        space_index += 1;
     }
 
-    return first_name;
+    return &full_name[0..space_index];
 }
