@@ -173,13 +173,51 @@
 // }
 
 
-// assignment: write the logic to first filter all odd values then double each value and create a new vector
-fn main() {
-    let nums = vec![1, 2, 3, 4, 5, 6];
-    let iter = nums.iter();
+// // assignment: write the logic to first filter all odd values then double each value and create a new vector
+// fn main() {
+//     let nums = vec![1, 2, 3, 4, 5, 6];
+//     let iter = nums.iter();
 
-    let iter2 = iter.filter(|x| *x % 2 != 0).map(|x| x * 2);
+//     let iter2 = iter.filter(|x| *x % 2 != 0).map(|x| x * 2);
 
-    let new_vec: Vec<i32> = iter2.collect();
-    println!("{:?}", new_vec);
+//     let new_vec: Vec<i32> = iter2.collect();
+//     println!("{:?}", new_vec);
+// }
+
+
+
+
+// strings and slices
+
+// // strings
+// fn main() {
+//     let mut str = String::from("Sada");                                 // string initialization
+//     println!("{}", str);
+
+//     str.push_str("shiva");                                               // string mutation
+//     println!("{}", str);
+
+//     str.replace_range(4..str.len(), "");                     // edit/delete string
+//     println!("{}", str);   
+// }
+
+
+// string
+fn main(){
+    let full_name = String::from("Sada Shiva");
+    let first_name = first_name(full_name);
+    println!("{}", first_name);
+}
+
+fn first_name(full_name: String) -> String {
+    let mut first_name = String::from("");
+
+    for char in full_name.chars() {
+        if char == ' ' {
+            break;
+        }
+        first_name.push_str(&char.to_string());
+    }
+
+    return first_name;
 }
