@@ -201,7 +201,6 @@
 //     println!("{}", str);   
 // }
 
-
 // // string
 // fn main(){
 //     let full_name = String::from("Sada Shiva");
@@ -223,8 +222,9 @@
 // }
 
 // // the above code creates new string to store first_name, we dont want it. We want to crete a view to the first_name from full_name.
-// // soluting
+// // solution
 
+// slices
 // fn main() {
 //     let full_name = String::from("Sada Shiva");
 //     let first_name = first_name(&full_name);
@@ -326,16 +326,40 @@
 //     println!("{}", longest_str);
 // }
 
-// Structs with Lifetimes
-struct User<'a> {
-    name: &'a str,
-}
+// // Structs with Lifetimes
+// struct User<'a> {
+//     name: &'a str,
+// }
 
+// fn main() {
+//     let name = String::from("Sada");
+//     let user1 = User {
+//         name: &name,
+//     };
+
+//     println!("{}", user1.name);
+// }
+
+
+
+
+
+// Multithreading
+
+use std::thread;
+use std::time::Duration;
 fn main() {
-    let name = String::from("Sada");
-    let user1 = User {
-        name: &name,
-    };
+    thread::spawn(|| {
+        for i in 0..100000 {
+            println!("Hi, number {i} from spwan thread.");
+            thread::sleep(Duration::from_millis(1));
+        }
+    });
 
-    println!("{}", user1.name);
+    //handle.join().unwrap();
+
+    for i in 0..50000 {
+        println!("Hello, number {i} from main thread.");
+        thread::sleep(Duration::from_millis(1));
+    }
 }
