@@ -267,38 +267,75 @@
 
 
 
-// Traits
-pub trait Summary {
-    fn summarize(&self) -> String;
-}
+// // Traits
+// pub trait Summary {
+//     fn summarize(&self) -> String;
+// }
 
-pub trait Fix {
-    fn fix(&self) -> String {
-        return String::from("Hi");
-    }
-}
+// pub trait Fix {
+//     fn fix(&self) -> String {
+//         return String::from("Hi");
+//     }
+// }
 
-struct User {
-    name: String,
-    age: u32,
-}
+// struct User {
+//     name: String,
+//     age: u32,
+// }
 
-impl Summary for User{
-    fn summarize(&self) -> String {
-        return format!("Name: {}, age: {}", self.name, self.age);
-    }
-}
+// impl Summary for User{
+//     fn summarize(&self) -> String {
+//         return format!("Name: {}, age: {}", self.name, self.age);
+//     }
+// }
 
-impl Fix for User {}
+// impl Fix for User {}
 
-fn notify<T: Summary + Fix>(u: T) {
-    print!("{},  {}", u.fix(), u.summarize());
+// fn notify<T: Summary + Fix>(u: T) {
+//     print!("{},  {}", u.fix(), u.summarize());
+// }
+
+// fn main() {
+//     let user1 = User {
+//         name: String::from("Sada"),
+//         age: 23,
+//     };
+//     notify(user1);
+// }
+
+
+
+
+// Lifetimes
+
+// fn longest_string<'a>(str1: &'a str, str2: &'a str) -> &'a str {
+//     if str1.len() > str2.len() {
+//         str1
+//     } else {
+//         str2
+//     }
+// }
+
+// fn main() {
+//     let longest_str;
+//     let str1 = String::from("Sada");
+//     {
+//         let str2 = String::from("Shiva");
+//         longest_str = longest_string(&str1, &str2);
+//     }
+//     println!("{}", longest_str);
+// }
+
+// Structs with Lifetimes
+struct User<'a> {
+    name: &'a str,
 }
 
 fn main() {
+    let name = String::from("Sada");
     let user1 = User {
-        name: String::from("Sada"),
-        age: 23,
+        name: &name,
     };
-    notify(user1);
+
+    println!("{}", user1.name);
 }
