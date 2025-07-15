@@ -344,22 +344,71 @@
 
 
 
-// Multithreading
+// // Multithreading
 
+// use std::thread;
+// use std::time::Duration;
+// fn main() {
+//     thread::spawn(|| {
+//         for i in 0..100000 {
+//             println!("Hi, number {i} from spwan thread.");
+//             thread::sleep(Duration::from_millis(1));
+//         }
+//     });
+
+//     //handle.join().unwrap();
+
+//     for i in 0..50000 {
+//         println!("Hello, number {i} from main thread.");
+//         thread::sleep(Duration::from_millis(1));
+//     }
+// }
+
+
+
+
+// Message Parsing                                                      // transfering messages from one thread to another
+
+// use std::sync::mpsc;                                                 // mpsc  => Multi Producer Single Consumer
+// use std::thread;
+// fn main() {
+//     let (tx, rx) = mpsc::channel();
+
+//     thread::spawn(move|| {
+//         let val = String::from("Hi");
+//         tx.send(val).unwrap();
+//     });
+
+//     let received = rx.recv().unwrap();
+//     println!("{}", received);
+// }
+
+// assignment: write multi-threded code that utilizes all core to calculate values from 1 to 7*2^10(my pc is 7 core)
+use std::sync::mpsc;
 use std::thread;
-use std::time::Duration;
+
 fn main() {
-    thread::spawn(|| {
-        for i in 0..100000 {
-            println!("Hi, number {i} from spwan thread.");
-            thread::sleep(Duration::from_millis(1));
-        }
-    });
+    let (tx, rx) = mpsc::channel();
 
-    //handle.join().unwrap();
-
-    for i in 0..50000 {
-        println!("Hello, number {i} from main thread.");
-        thread::sleep(Duration::from_millis(1));
+    for i in 0..7 {
+        let producer = tx.clone();              // we are using clone of 'tx'
+        thread::spawn(move|| {
+            let mut ans: i64 = 0;
+            for j in 0..10000000 {
+                ans = ans + (i * 10000000 + j); 
+            }
+            producer.send(ans).unwrap();
+        });
     }
+    drop(tx);
+
+    let mut ans = 0;
+
+    // this for loop will wait until all 'tx' finishes. Since we are not using original 'tx', we are droping it at the end of loop.
+    for val in rx {
+        ans = ans + val;
+        println!("Recieved value");
+    }
+
+    println!("Total sum = {}", ans);
 }
