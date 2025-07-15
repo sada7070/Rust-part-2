@@ -247,20 +247,58 @@
 
 
 
+// // Generics
+// fn main() {
+//     let largest_num = largest(1, 2);
+//     let largest_char = largest('a', 'b');
 
-// Generics
-fn main() {
-    let largest_num = largest(1, 2);
-    let largest_char = largest('a', 'b');
+//     println!("largest number: {}", largest_num);
+//     println!("largest character: {}", largest_char);
+// }
 
-    println!("largest number: {}", largest_num);
-    println!("largest character: {}", largest_char);
+// fn largest<T: std::cmp::PartialOrd>(a: T, b: T) -> T {
+//     if a > b {
+//         a
+//     } else {
+//         b
+//     }
+// }
+
+
+
+
+// Traits
+pub trait Summary {
+    fn summarize(&self) -> String;
 }
 
-fn largest<T: std::cmp::PartialOrd>(a: T, b: T) -> T {
-    if a > b {
-        a
-    } else {
-        b
+pub trait Fix {
+    fn fix(&self) -> String {
+        return String::from("Hi");
     }
+}
+
+struct User {
+    name: String,
+    age: u32,
+}
+
+impl Summary for User{
+    fn summarize(&self) -> String {
+        return format!("Name: {}, age: {}", self.name, self.age);
+    }
+}
+
+impl Fix for User {}
+
+fn notify<T: Summary + Fix>(u: T) {
+    print!("{},  {}", u.fix(), u.summarize());
+}
+
+fn main() {
+    let user1 = User {
+        name: String::from("Sada"),
+        age: 23,
+    };
+    notify(user1);
 }
